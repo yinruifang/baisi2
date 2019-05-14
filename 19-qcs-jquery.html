@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>qcs的实例</title>		
+		<style>
+			#div{width: 800px; min-height: 200px; border:5px dotted #ccc;}
+		</style>
+		
+	</head>
+	<body>
+		<button id="btn">
+			获取新闻
+		</button>
+		<h2>返回的数据</h2>
+		<ul id="div"></ul>
+		<script type="text/javascript" src="jquery-3.2.1.min.js" ></script>
+		<script type="text/javascript">
+		$(function(){
+			$('#btn').click(function(){
+				
+				//ajax获取数据
+//				$.ajax({
+//					type:"get",//获取去数据的方式  两种 get  post
+//					url:"getNews.php",//服务器的地址
+//					async:true,//异步调用
+//					data:"",//获取数据时的传参
+//					dataType:"json",//从服务器获取到的数据的格式
+//					success:function(data){//成功的回调
+//						console.log(data);
+//						for(var i =0;i<data.length;i++){
+//							var $li = $('<li><a href="#">'+data[i].title+'</a> [<span>'+data[i].date+'</span>]</li>');
+//							$('#div').append($li);
+//						}
+//					},
+//					error:function(error){//失败的回调
+//						console.log(error);
+//					}
+//				});
+				
+				//使用 get方式获取数据
+				$.get({
+					url:"https://h5.watsons.com.cn/item/ws/group_list?current_page=1&page_size=12&group_id=14800&device_id=74eec330-4faa-11e9-b81d-85017408430d",//服务器的地址
+					async:true,//异步调用
+					data:"",//获取数据时的传参
+					dataType:"json",//从服务器获取到的数据的格式
+					success:function(data){//成功的回调
+						console.log(data);
+//						for(var i =0;i<data.length;i++){
+//							var $li = $('<li><a href="#">'+data[i].title+'</a> [<span>'+data[i].date+'</span>]</li>');
+//							$('#div').append($li);
+//						}
+					},
+					error:function(error){//失败的回调
+						console.log(error);
+					}
+				});
+				
+				
+				//使用 post方式获取数据
+				//$.post();
+				
+			});
+			
+			
+		})
+		
+		
+			
+			
+//			var oBtn = document.getElementById('btn');
+//			var oDiv = document.getElementById('div');
+//			oBtn.onclick = function(){
+//				//调用ajax的函数
+//				//四个参数  method ：ajax获取的方式  get，post
+//				//url：ajax访问的地址
+//				//data：ajax传递的参数
+//				//success：ajax成功返回后的回调函数
+//				//function ajax(method,url,data,success)
+//				ajax('get','getNews.php','',function(data){
+//					console.log(data);
+//					//渲染
+//					var data = JSON.parse(data);
+//					//console.log(data);
+//					//5.渲染到页面上
+//					//循环
+//					for(var i = 0;i< data.length;i++){
+//						oDiv.innerHTML += '<li><a href="#">'+data[i].title+'</a> [<span>'+data[i].date+'</span>]</li>';// xhr.responseText 服务器返回的内容	
+//					}
+//				});
+//			}
+		</script>
+	</body>
+</html>

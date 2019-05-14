@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>新闻的实例</title>		
+		<style>
+			#div{width: 800px; min-height: 200px; border:5px dotted #ccc;}
+		</style>
+		
+	</head>
+	<body>
+		<button id="btn">
+			获取新闻
+		</button>
+		<h2>返回的数据</h2>
+		<ul id="div"></ul>
+		<script type="text/javascript" src="jquery-3.2.1.min.js" ></script>
+		<script type="text/javascript">
+		$(function(){
+			$('#btn').click(function(){
+				var  pro = new Promise(
+					resolve=>{
+						$.ajax({
+							type:"get",//获取去数据的方式  两种 get  post
+							url:"getNews.php",//服务器的地址
+							async:true,//异步调用
+							data:"",//获取数据时的传参
+							dataType:"json",//从服务器获取到的数据的格式
+							success:function(data){//成功的回调
+								resolve(data);
+							},
+							error:function(error){//失败的回调
+								console.log(error);
+							}
+						});
+					},reject=>{
+						reject('error');
+					}
+				);
+				//ajax获取数据
+				
+				//在success外面渲染数据
+				pro.then(function(data){
+					for(var i =0;i<data.length;i++){
+						var $li = $('<li><a href="#">'+data[i].title+'</a> [<span>'+data[i].date+'</span>]</li>');
+						$('#div').append($li);
+					}
+				},function(error){
+					console.log(error);
+					
+				}
+				);
+				
+			});
+		})
+		
+		</script>
+	</body>
+</html>
